@@ -1,7 +1,28 @@
-.App {
-  
-  
+.App{
+  height: 100%;
+  width: 100%;
 }
 body{
+  width: 100%;
+  height: 100%;
+}
+.sea1{
+  display: block;
+width: 10px;
+padding: 5px;
+margin-left: 10px;
+margin-top: 10px;
+font-size: 22px;
+
+}
+body{
+  color: white;
   background-color: rgb(17, 16, 15);
+}
+
+.sli{
+  display: flex;
+  flex: wrap;
+  width: 100%;
+    
 }

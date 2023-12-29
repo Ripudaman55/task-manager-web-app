@@ -1,0 +1,82 @@
+/* Sidebar.css */
+
+.slider {
+  display: inline-block;
+
+  width: 25%;
+  /*WIDTH OF SIDEBAR*/
+  height: 100%;
+  transform: translateX(-100%);
+  /* Initial position outside the viewport */
+
+  overflow-y: auto;
+  /* Enable vertical scrolling */
+  scrollbar-width: thin;
+  /* For Firefox */
+  scrollbar-color: black;
+  /* For Firefox */
+
+
+  &::-webkit-scrollbar {
+    width: 0;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: black;
+  }
+}
+
+.slide-in {
+  display: inline-block;
+  animation: slideInAnimation 0.5s ease-in-out forwards;
+  /* Animation duration and easing function */
+}
+
+@keyframes slideInAnimation {
+  to {
+    transform: translateX(0);
+    /* Final position inside the viewport */
+  }
+}
+
+
+.scrollspy-example {
+  width: 100%;
+  border: solid 0px;
+  border-radius: 5px;
+  margin-left: 0px;
+  background-color: rgb(37, 36, 35);
+
+  &::-webkit-scrollbar {
+    width: 10px;
+    border-radius: 5px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgb(86, 85, 85);
+    border-radius: 5px;
+  }
+}
+
+
+.fa-thin{
+  font-size: 20px;
+}
+.scrollspy-example button {
+  padding: 20px;
+  margin-top: 10px;
+  width: 100%;
+  font-size: 18px;
+  background-color: rgb(37, 36, 35);
+  color: white;
+  border: solid 0px;
+
+}
+
+.scrollspy-example button:hover {
+  background-color: rgb(59, 58, 57);
+}
+
+.items {
+  width: 100%;
+}

@@ -1,4 +1,8 @@
-.Tasks{
+.Task{
     color: white;
+    display: inline-block;
+    width: 100%;
+    align-items: center;
+    text-align: center;
     
 }
