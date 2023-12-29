@@ -8,6 +8,10 @@ body{
 }
 .sea1{
   display: block;
+  position: fixed;
+  top: 10%;
+  left: 10px;
+  z-index: 99;
 width: 10px;
 padding: 5px;
 margin-left: 10px;
@@ -24,5 +28,10 @@ body{
   display: flex;
   flex: wrap;
   width: 100%;
-    
+  
+}
+.alis{
+  width: 30%;
+  height: 600px;
+  margin: 0px;
 }

@@ -5,7 +5,7 @@ import Header from './Components/Header';
 import Sidebar from './Components/Sidebar';
 
 function App() {
-  const [slider, setslider] = useState(false)
+  const [slider, setslider] = useState(true)
   return (
     <div className="App">
      <Header/>
@@ -13,10 +13,8 @@ function App() {
      <i class="sea1 bi-list" onClick={()=>{setslider(!slider)}}></i>
      <div className='sli'>
      <Sidebar result={slider}/>
-     
      <AllTasks/>
      </div>
-     
     </div>
   );
 }

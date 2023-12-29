@@ -2,7 +2,13 @@
     color: white;
     display: inline-block;
     width: 100%;
+    height: 100%;
     align-items: center;
     text-align: center;
     
 }
+.alis1{
+    width: 100%;
+    height: 600px;
+    margin: 0px;
+  }
