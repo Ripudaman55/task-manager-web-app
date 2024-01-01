@@ -3,9 +3,10 @@
 .slider {
   display: inline-block;
 
-  width: 80%;
+  width: 100%;
   /*WIDTH OF SIDEBAR*/
   height: 100%;
+  background-color: rgb(37, 36, 35);
   transform: translateX(-100%);
   /* Initial position outside the viewport */
 
@@ -85,9 +86,10 @@
 }
 
 .alis{
-  width: 40%;
-  height: 700px;
+  width: 28%;
+  height: 750px;
   margin: 0px;
+  
 }
 
 .listnew{

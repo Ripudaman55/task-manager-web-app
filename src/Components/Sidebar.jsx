@@ -26,8 +26,8 @@ function Sidebar(props) {
               data-bs-smooth-scroll="true"
               class="scrollspy-example"
               tabindex="0"
-            >
-              <button id="simple-list-item-1">
+            >  
+              <button type="radio"id="simple-list-item-1">
                 <i class="bi bi-brightness-high"></i>My Day
               </button>
               <button id="simple-list-item-2">
