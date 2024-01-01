@@ -28,7 +28,7 @@ function Sidebar(props) {
               tabindex="0"
             >  
               <button type="radio"id="simple-list-item-1">
-                <i class="bi bi-brightness-high"></i>My Day
+                <i class="bi bi-brightness-high"></i>MYYYYYYYYY
               </button>
               <button id="simple-list-item-2">
                 <i class="bi bi-star"></i>Important
