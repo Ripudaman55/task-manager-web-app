@@ -1,0 +1,30 @@
+.loginheader{
+    display:  block;
+    text-align: center;
+    align-items: center;
+}
+
+.loginheader h3{
+    display: inline-block;
+    margin: 5px;
+    width: 150px;
+}
+.loginheader input{
+    display: inline-block;
+    margin: 10px;
+}
+
+.createbtn{
+    display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
+        text-align: center;
+        text-decoration: none;
+        cursor: pointer;
+        border: none;
+        margin: 20px;
+        width: 40%;
+        border-radius: 4px;
+        background-color: #8822b1; /* Change this to your desired background color */
+        color: #ffffff; 
+}

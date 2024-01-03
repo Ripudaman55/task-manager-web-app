@@ -1,0 +1,63 @@
+
+.loginheader{
+    background-color: rgb(27, 26, 25);
+    /* text-align: center; */
+    padding:10px;
+        border: solid;
+        border-width: 1px;
+        border-radius: 10px;
+        display: block;
+        margin-left: 200px;
+        margin-top: 50px;
+        margin-bottom: 100px;
+        margin-right: 200px;
+        text-align: center;
+    }
+    /* .header h3{
+        margin-left: 50px;
+         text-align: left; 
+        text-decoration: none;
+        font-size: medium;
+        font-weight: normal;
+    } */
+
+    .H31{
+        margin-left: 100px;
+    }
+
+    .loginheader input{
+        display: block;
+        width: 40%;
+    }
+    
+    .signup{
+        display: block;
+        align-items: right;
+        text-align: right;
+        margin-right: 50px;  
+    }
+
+    .signup button{
+        color: rgb(135, 42, 188);
+        font-size: 20px;
+        margin-top: 20px;
+        background-color: bisque;
+        border:rgb(135, 42, 188);
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    
+    .login_btn{
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
+        text-align: center;
+        text-decoration: none;
+        cursor: pointer;
+        border: none;
+        margin: 20px;
+        width: 40%;
+        border-radius: 4px;
+        background-color: #8822b1; /* Change this to your desired background color */
+        color: #ffffff; 
+    }
