@@ -18,7 +18,7 @@ function Sidebar(props) {
     <>
       {isVisible && (
         <div className="alis">
-          <div ref={sidebarRef} className={`slider slide-in`}>
+          <div ref={sidebarRef} className={`slider`}>
             <div
               data-bs-spy="scroll"
               data-bs-target="#simple-list-example"
@@ -59,9 +59,11 @@ function Sidebar(props) {
               <button id="simple-list-item-7">Item 1</button>
               <button id="simple-list-item-8">Item 1</button>
             </div>
-          </div>
-          <div className="listnew">hello</div>
+          <div className="listnew">
+            <input type="text" placeholder="new List"  />
+            </div>
         </div>
+          </div>
       )}
     </>
   );
