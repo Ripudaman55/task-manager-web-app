@@ -8,6 +8,7 @@ import Signup from './Components/SignUp';
 import Login from './Components/Login';
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, app } from "./firebase";
+import { Link, Router, Routes } from 'react-router-dom';
 
 function App() {
   const [slider, setslider] = useState(true)
@@ -27,21 +28,24 @@ function App() {
         setUser(user);
       }
       else {
+        auth.signOut();
+        
+        console.log("LOGEEDOUT");
         Setls(0)
         setlogged(false)
-        auth.signOut();
-        console.log("LOGEEDOUT");
       }
     })
   }, [user])
   return (
+
+
     <div className="App">
       <Header logged={islogged} setlogged={setlogged} />
       {!islogged ?
         <div>
           {
             LS === 0 || LS === 1 || LS === 2 ?
-              <div className='loginsingup'>
+            <div className='loginsingup'>
                 <button onClick={() => { Setls(1); console.log('1') }}>Login</button>
                 <button onClick={() => Setls(2)}>Signup</button>
 
@@ -49,7 +53,7 @@ function App() {
                   LS === 1 ? <Login logged={setlogged} /> : ""
                 }
                 {
-                  LS === 2 ? <Signup /> : ""
+                  LS === 2 ? <Signup setls= {Setls}/> : ""
                 } </div>
               : ""}</div>
         :
@@ -62,6 +66,7 @@ function App() {
         </div>
       }
     </div>
+    
   );
 }
 

@@ -5,11 +5,14 @@ import React from "react";
 function Sidebar(props) {
   const sidebarRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
-  const [taskshown, settaskn] = useState("All")
+  const [taskshown, settaskn] = useState('')
   const handletaskn=(e)=>{
-    console.log(e);
-    props.settask(e);
     
+  console.log(e);
+  console.log(taskshown)
+  props.settask(e)
+  settaskn(e);
+
   }
   useEffect(() => {
     
@@ -35,7 +38,7 @@ function Sidebar(props) {
               class="scrollspy-example"
               tabindex="0"
             >  
-              <button type="radio"id="simple-list-item-1" name="My Day"onClick={(e)=>{handletaskn(e.target.name)}}>
+              <button type="radio"id="simple-list-item-1" name="My Day"onClick={(e)=>{handletaskn("My Day")}}>
                 <i class="bi bi-brightness-high"></i>My Day
               </button>
               <button id="simple-list-item-2" name="Important" onClick={(e)=>{handletaskn(e.target.name)}}>

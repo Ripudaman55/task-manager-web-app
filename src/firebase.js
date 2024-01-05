@@ -45,49 +45,66 @@ const db = getFirestore(app);
 export const auth = getAuth();
 const provider = new GoogleAuthProvider();
 
-export const CreateNewUser = async (detail, extra) => {
+export async function createAuthUserWithEmailAndPassword(email, password) {
+  if (!email || !password) return;
+  return await createUserWithEmailAndPassword(auth, email, password);
+}
+
+export async function signinAuthUserWithEmailAndPassword(email, password) {
+  if (!email || !password) return;
+  return await signInWithEmailAndPassword(auth, email, password);
+}
+
+export const CreateNewUser = async (detail, user) => {
   try {
-    var today = new Date();
-    var dd = String(today.getDate()).padStart(2, "0");
-    var mm = String(today.getMonth() + 1).padStart(2, "0");
-    var yyyy = today.getFullYear();
-    today = yyyy + "-" + mm + "-" + dd;
-    console.log(detail);
-    const result = await setDoc(doc(db, "users", detail.email), {
+    const today = new Date();
+    const formattedDate = today.toISOString().split("T")[0]; // Format as "yyyy-MM-dd"
+
+    // const userCollection = collection(db, "users");
+
+    // const newUserRef = await addDoc(userCollection, {
+      const result = await setDoc(doc(db, "users", detail.email), {  
       isWelcome: false,
       username: detail.displayName,
       email: detail.email,
       password: detail.password,
+      uid: user.uid,
       confirmPassword: detail.confirmPassword,
-      CreatedAt: new Date(),
-      Task: {
-        MyDay: [], 
-        All: [],
-        Important: [],
-        Planned:[],
-        extra
-      }
+      createdAt: formattedDate,
+      task: {
+        myDay: [],
+        all: [],
+        important: [],
+        planned: [],
+      },
     });
-    alert("user created!!!");
-  } catch (e) {
-    console.log("create user error", e);
+
+    alert("User created successfully!");
+  } catch (error) {
+    console.error("Create user error:", error);
   }
 };
 
+export const AddUserTask = async (user, taskvalue, date) => {
+  try {
+     let isimportant = false;
+     let iscompleted = false;
+    const userDocRef = doc(db, 'users', user.email);
+    const userDocSnapshot = await getDoc(userDocRef);
+    if (userDocSnapshot.exists()) {
+      const userData = userDocSnapshot.data();
+      const existingTasks = userData.task?.all || [];
+      existingTasks.push({ taskvalue, date, isimportant , iscompleted  });
+      await updateDoc(userDocRef, { 'task.all': existingTasks });
 
-export const AddUserTask = async (user, taskvalue, today)=>{
-  var obj =[];
-  const docRef = doc(db, "users", user);
-  const docSnap = await getDoc(docRef);
-  const data = docSnap.data();
-  console.log(data)
-  await updateDoc(docRef, {
-    Task: [
-      ... taskvalue[today]
-    ]
-  });
-  return obj;
-}
+      alert('Task added!');
+    } else {
+      console.log('User document not found');
+    }
+  } catch (error) {
+    console.error('Error adding task:', error);
+  }
+};
 
 //Forgot Password
 export const updateUserPassword = async (email) => {
@@ -97,12 +114,77 @@ export const updateUserPassword = async (email) => {
 };
 
 
-export async function createAuthUserWithEmailAndPassword(email, password) {
-  if (!email || !password) return;
-  return await createUserWithEmailAndPassword(auth, email, password);
+
+export const GetAllTasks= async (userid)=>{
+  try{
+
+    let obj= [];
+    const q = query(collection(db, "users"), where("uid", "==", userid));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc)=>{
+    obj= doc.data().task.all
+    
+  })
+  return obj;
+}
+  catch(e){
+    console.log("error in getalltasks", e)
+  }
 }
 
-export async function signinAuthUserWithEmailAndPassword(email, password) {
-  if (!email || !password) return;
-  return await signInWithEmailAndPassword(auth, email, password);
+export const ChangeofImportance= async(userid, item, importance)=>{
+
+  const userDocRef = doc(db, 'users', userid);
+  const userDocSnapshot = await getDoc(userDocRef);
+  
+  if (userDocSnapshot.exists()) {
+    const userData = userDocSnapshot.data();
+    const existingTasks = userData.task?.all || [];
+  
+    // Find the index of the task you want to update
+    const taskIndexToUpdate = existingTasks.findIndex(task => task.taskvalue === item.taskvalue && task.date === item.date);
+  
+    if (taskIndexToUpdate !== -1) {
+      // If the task is found, update its properties
+      existingTasks[taskIndexToUpdate].isimportant = importance;
+  
+      // Update the 'task.all' field in the document
+      await updateDoc(userDocRef, { 'task.all': existingTasks });
+      console.log('Task updated successfully!');
+      return;
+    } else {
+      console.log('Task not found for updating.');
+    }
+  } else {
+    console.log('User document does not exist.');
+  }
+  
+}
+
+export const MarkasCompleted =async(userid, item, completedstats)=>{
+  const userDocRef = doc(db, 'users', userid);
+  const userDocSnapshot = await getDoc(userDocRef);
+  
+  if (userDocSnapshot.exists()) {
+    const userData = userDocSnapshot.data();
+    const existingTasks = userData.task?.all || [];
+  
+    // Find the index of the task you want to update
+    const taskIndexToUpdate = existingTasks.findIndex(task => task.taskvalue === item.taskvalue && task.date === item.date);
+  
+    if (taskIndexToUpdate !== -1) {
+      // If the task is found, update its properties
+      existingTasks[taskIndexToUpdate].iscompleted = completedstats;
+  
+      // Update the 'task.all' field in the document
+      await updateDoc(userDocRef, { 'task.all': existingTasks });
+      console.log('Task updated successfully!');
+      return;
+    } else {
+      console.log('Task not found for updating.');
+    }
+  } else {
+    console.log('User document does not exist.');
+  }
+
 }

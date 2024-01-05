@@ -7,6 +7,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { Link, useNavigate} from "react-router-dom";
 
 import {
+  CreateNewUser,
   // signInWithGooglePopup,
   // createuserdocfromAuth,
   //userDocRef,
@@ -22,7 +23,6 @@ function Login(props) {
     password: "",
   });
   const { email, password } = contact;
-  console.log(contact);
   async function handleClick(event) {
   
     try {
@@ -35,12 +35,8 @@ function Login(props) {
         alert("Enter the credentials First.....👎🏻")
         // return nav('/login')
       }
-    
-      console.log(response);
-    
      
       props.logged(true);
-      
       alert("SIGN IN CONFIRM 👍")
     //   return nav('/');
       

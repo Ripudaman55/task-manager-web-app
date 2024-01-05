@@ -3,9 +3,9 @@ import "./SignUp.css";
 import { useNavigate } from "react-router-dom";
 import { CreateNewUser, createAuthUserWithEmailAndPassword } from "../firebase";
 import {auth} from '../firebase'
-function Signup() {
+function Signup(props) {
 
-//   const nav = useNavigate();
+  // const nav = useNavigate();
   const [contact, setcontact] = useState({
     displayName: "",
     email: "",
@@ -14,29 +14,24 @@ function Signup() {
   });
 
   const { displayName, email, password, confirmPassword } = contact;
-  console.log(contact);
   async function handleClick(event) {
     if (password !== confirmPassword) {
       alert("Password do not match");
       return;
     }
-    console.log(email);
-    console.log(displayName);
-    console.log(password);
-    console.log(confirmPassword);
     try {
       const { user } = await createAuthUserWithEmailAndPassword(
         email,
         password
       );
-      CreateNewUser(contact); 
       if(user === undefined)
       {
         alert("ENTER THE CREDENTIALS FIRST 🤨")
       }
-      console.log(user);
+      CreateNewUser(contact, user); 
+      props.setls(1)
       alert("SIGNUP DONE");
-    //   return nav('/Login');
+      // return nav('/Login');
 
     } catch (error) {
       console.log("error in creation", error.message);
