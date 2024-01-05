@@ -97,7 +97,7 @@ export const AddUserTask = async (user, taskvalue, date) => {
       existingTasks.push({ taskvalue, date, isimportant , iscompleted  });
       await updateDoc(userDocRef, { 'task.all': existingTasks });
 
-      alert('Task added!');
+      // alert('Task added!');
     } else {
       console.log('User document not found');
     }

@@ -4,6 +4,8 @@ import "./AllTasks.css";
 import { AddUserTask, ChangeofImportance, GetAllTasks, MarkasCompleted } from "../firebase";
 import AllCat from "./TaskCategory/AllCat";
 import Important from "./TaskCategory/Important";
+import Planned from "./TaskCategory/Planned";
+import MyDay from "./TaskCategory/MyDay";
 function AllTasks(props) {
   const [AllTasks, setTasks] = useState([]);
   const [cat, setcat] = useState(props.Taskn);
@@ -75,8 +77,8 @@ function AllTasks(props) {
 
 {props.Taskn === "All" ? ( <AllCat AllTasks = {AllTasks} user={props.user}/>): null}
 {props.Taskn === "Important" ? ( <Important AllTasks = {AllTasks} user={props.user}/>): null}
-{props.Taskn === "Planned" ? ( <Important AllTasks = {AllTasks} user={props.user}/>): null}
-{props.Taskn === "My Day" ? ( <Important AllTasks = {AllTasks} user={props.user}/>): null}
+{props.Taskn === "Planned" ? ( <Planned AllTasks = {AllTasks} user={props.user}/>): null}
+{props.Taskn === "My Day" ? ( <MyDay AllTasks = {AllTasks} user={props.user}/>): null}
 
       </div>
     </div>
