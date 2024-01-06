@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import "./AllTasks.css";
-import { AddUserTask, ChangeofImportance, GetAllTasks, MarkasCompleted } from "../firebase";
+import { AddUserTask, ChangeofImportance, GetAllCategoryTasks,  MarkasCompleted } from "../firebase";
 import AllCat from "./TaskCategory/AllCat";
 import Important from "./TaskCategory/Important";
 import Planned from "./TaskCategory/Planned";
@@ -38,14 +38,14 @@ function AllTasks(props) {
       var mm = String(today.getMonth() + 1).padStart(2, "0");
       var yyyy = today.getFullYear();
       today = dd + "-" + mm + "-" + yyyy;
-      AddUserTask(props.user, inputValue, today);
+      GetAllCategoryTasks(props.user, inputValue, today);
       // Reset the input value
       setInputValue("");
       // alert("data uploaded");
     }
   };
   const getdata = async () => {
-    const result = await GetAllTasks(props.user.uid);
+    const result = await GetAllCategoryTasks(props.user.uid);
     setTasks(result);
     // console.log("All tasks: ", AllTasks);
   };

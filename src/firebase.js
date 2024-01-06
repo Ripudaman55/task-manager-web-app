@@ -20,6 +20,7 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
   signInWithEmailAndPassword,
+  sendEmailVerification
 } from "firebase/auth";
 import { set } from "firebase/database";
 import { createUserWithEmailAndPassword } from "firebase/auth";
@@ -116,7 +117,7 @@ export const updateUserPassword = async (email) => {
 
 
 
-export const GetAllTasks= async (userid)=>{
+export const GetAllCategoryTasks= async (userid)=>{
   try{
 
     let obj= [];
@@ -189,4 +190,62 @@ export const MarkasCompleted =async(userid, item, completedstats)=>{
     console.log('User document does not exist.');
   }
 
+}
+
+export const NewListInserted=async(userId, name )=>{
+  console.log(userId)
+  const userDocRef = doc(db, 'users', userId);
+
+
+const userDocSnapshot = await getDoc(userDocRef);
+
+if (userDocSnapshot.exists()) {
+  const userData = userDocSnapshot.data();
+
+ 
+  const allTasks = userData.task || [];
+  const listName = { [name]: [] };
+  if (!Array.isArray(allTasks[name.trim()])) {
+    allTasks[name.trim()] = [];
+  }
+  console.log(allTasks)
+  
+  console.log(allTasks)
+ await updateDoc(userDocRef, { task: allTasks });
+}
+}
+
+
+export const getAllTasks = async(userid)=>{
+  try{
+
+    let obj= [];
+    const q = query(collection(db, "users"), where("uid", "==", userid));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc)=>{
+    obj= doc.data().task
+    
+  })
+  return obj;
+}
+  catch(e){
+    console.log("error in getalltasks", e)
+  }
+
+}
+
+
+export const EmailVerifyByFirebase= async(userid)=>{
+  const user = auth.currentUser;
+
+  if (user) {
+    try {
+      await sendEmailVerification(user);
+      console.log("Email verification sent!");
+    } catch (error) {
+      console.error("Error sending email verification:", error.message);
+    }
+  } else {
+    console.error("No user found.");
+  }
 }

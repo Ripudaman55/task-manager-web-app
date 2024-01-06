@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./SignUp.css";
 import { useNavigate } from "react-router-dom";
-import { CreateNewUser, createAuthUserWithEmailAndPassword } from "../firebase";
+import { CreateNewUser, EmailVerifyByFirebase, createAuthUserWithEmailAndPassword } from "../firebase";
 import {auth} from '../firebase'
 function Signup(props) {
 
@@ -29,6 +29,7 @@ function Signup(props) {
         alert("ENTER THE CREDENTIALS FIRST 🤨")
       }
       CreateNewUser(contact, user); 
+      EmailVerifyByFirebase(user.email)
       props.setls(1)
       alert("SIGNUP DONE");
       // return nav('/Login');

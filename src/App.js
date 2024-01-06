@@ -7,7 +7,7 @@ import { Button } from 'bootstrap';
 import Signup from './Components/SignUp';
 import Login from './Components/Login';
 import { onAuthStateChanged } from "firebase/auth";
-import { auth, app } from "./firebase";
+import { auth, app,  GetAllCategoryTasks, getAllTasks } from "./firebase";
 import { Link, Router, Routes } from 'react-router-dom';
 
 function App() {
@@ -16,9 +16,25 @@ function App() {
   const [LS, Setls] = useState(0);
   const [user, setUser] = useState("");
   const [taskn, setTask] = useState("");
-
+  const [Alltasks, setalltask] = useState([])
+  const getdata = async () => {
+    const result = await getAllTasks(user.uid);
+    setalltask(result);
+    // console.log("All tasks: ", AllTasks);
+  };
+  useEffect(() => {
+    let i = 0;
+    if (i <= 5) {
+      getdata();
+      console.log(AllTasks)
+    }
+    i++;
+    setTimeout(getdata, 4000);
+  },[]);
 
   useEffect(() => {
+    // setalltask(GetAllTasks())
+  //  setTimeout(  console.log(Alltasks),3000)
     onAuthStateChanged(auth, (user) => {
       if (user) {
         setlogged(true)
@@ -60,7 +76,7 @@ function App() {
         <div className='App'>
           <i className="sea1 bi-list" onClick={() => { setslider(!slider) }}></i>
           <div className='sli'>
-            <Sidebar result={slider} settask={setTask}/>
+            <Sidebar Alltasks= {Alltasks} user={user} result={slider} settask={setTask}/>
             <AllTasks Taskn={taskn} user={user} />
           </div>
         </div>
