@@ -191,6 +191,35 @@ export const MarkasCompleted =async(userid, item, completedstats)=>{
   }
 
 }
+export const MarkasCompletedCustom =async(userid, item, completedstats)=>{
+  const userDocRef = doc(db, 'users', userid);
+  const userDocSnapshot = await getDoc(userDocRef);
+  
+  if (userDocSnapshot.exists()) {
+    const userData = userDocSnapshot.data();
+    const existingTasks = userData.task?.custom || [];
+  
+    // Find the index of the task you want to update
+    const taskIndexToUpdate = existingTasks.findIndex(task => task.taskvalue === item.taskvalue && task.date === item.date);
+  
+    // if (taskIndexToUpdate !== -1) {
+    //   // If the task is found, update its properties
+    //   existingTasks[taskIndexToUpdate].iscompleted = completedstats;
+  
+    //   // Update the 'task.all' field in the document
+    //   await updateDoc(userDocRef, { 'task.completed': existingTasks });
+    //   await updateDoc(userDocRef, { 'task.all': existingTasks });
+    //   console.log('Task updated successfully!');
+    //   return;
+    // }
+    //  else {
+      // console.log('Task not found for updating.');
+    // }
+  } else {
+    console.log('User document does not exist.');
+  }
+
+}
 
 export const NewListInserted=async(userId, name )=>{
   console.log(userId)
