@@ -20,48 +20,54 @@ function Important(props) {
       };
 
   return (
-    <div className="showtasks"
-    data-bs-target="#simple-list-example"
-              data-bs-offset="2"
-              data-bs-smooth-scroll="true"
-              class="scrollspy-example showtasks"
-              tabindex="0">
-
-            {props.AllTasks.map((item, i) => {
-              console.log(item)
-              return (
-                <div className="eachtask"  style={{ display: item.isimportant === false ? "none" : 'block' }}>
-                {item.isimportant ? 
+    <>
+    <div
+        data-bs-spy="scroll"
+        data-bs-target="#simple-list-example"
+        data-bs-offset="2"
+        data-bs-smooth-scroll="true"
+        class="scrollspy-example scroller"
+        tabindex="1"
+        style={{ height: "60vh", width: "98%" }}
+      >
+        {props.AllTasks.map((item, i) => {
+          return (
+            <>
+              {item.iscompleted ? null : (
+                 <div className="eachtask"  style={{ display: item.isimportant === false ? "none" : 'block' }}>
                 
-                <div>
-                  <input type="checkbox" />
+                  <input
+                    type="checkbox"
+                    onClick={() => {
+                      CompletedOrNot(item);
+                    }}
+                  />
+
                   <p className="p1">{item.taskvalue} </p>
                   <p className="p2">{item.date}</p>
 
                   {!item.isimportant ? (
                     <div className="hearts">
-                    <i
-                    class="fa-regular fa-heart"
-                    onClick={() => importancechange(item)}
+                      <i
+                        class="fa-regular fa-heart"
+                        onClick={() => importancechange(item)}
                       ></i>
-                      </div>
-                      ) : (
-                        <div className="hearts">
+                    </div>
+                  ) : (
+                    <div className="hearts">
                       <i
                         class="fa-solid fa-heart"
                         onClick={() => importancechange(item)}
-                        ></i>
+                      ></i>
                     </div>
                   )}
                 </div>
-                  :
-                  null
-                  }
-                  
-                </div>
-              );
-            })}
-          </div>
+              )}
+            </>
+          );
+        })}
+        </div>
+    </>
     
   )
 }

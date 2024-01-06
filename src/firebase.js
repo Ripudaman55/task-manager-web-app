@@ -76,6 +76,7 @@ export const CreateNewUser = async (detail, user) => {
         all: [],
         important: [],
         planned: [],
+        completed: []
       },
     });
 
@@ -177,6 +178,7 @@ export const MarkasCompleted =async(userid, item, completedstats)=>{
       existingTasks[taskIndexToUpdate].iscompleted = completedstats;
   
       // Update the 'task.all' field in the document
+      await updateDoc(userDocRef, { 'task.completed': existingTasks });
       await updateDoc(userDocRef, { 'task.all': existingTasks });
       console.log('Task updated successfully!');
       return;
