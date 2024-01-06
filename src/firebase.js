@@ -204,9 +204,9 @@ if (userDocSnapshot.exists()) {
 
  
   const allTasks = userData.task || [];
-  const listName = { [name]: [] };
-  if (!Array.isArray(allTasks[name.trim()])) {
-    allTasks[name.trim()] = [];
+
+  if (!Array.isArray(allTasks.custom[name.trim()])) {
+    allTasks.custom[name.trim()] = [{}];
   }
   console.log(allTasks)
   
@@ -216,7 +216,7 @@ if (userDocSnapshot.exists()) {
 }
 
 
-export const getAllTasks = async(userid)=>{
+export const getCustomAllTasks = async(userid)=>{
   try{
 
     let obj= [];

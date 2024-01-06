@@ -1,20 +1,21 @@
 import { useRef, useState, useEffect } from "react";
 import "./Sidebar.css";
 import React from "react";
-import { GetAllTasks, NewListInserted } from "../firebase";
+import { NewListInserted, getCustomAllTasks } from "../firebase";
 
 function Sidebar(props) {
   const sidebarRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
   const [taskshown, settaskn] = useState("");
   const [NewListName, setInputValue] = useState("");
+  const [Alltasks, setalltask] = useState([]);
+  const [Alltaskstoshow, setalltasktoshow] = useState([]);
 
   const handletaskn = (e) => {
     console.log(e);
     console.log(taskshown);
     props.settask(e);
     settaskn(e);
-
   };
   const handleinput = async (e) => {
     if (e.key === "Enter") {
@@ -25,8 +26,21 @@ function Sidebar(props) {
     }
   };
 
- 
-  
+  const getdata = async () => {
+    const result1 = await getCustomAllTasks(props.user.uid);
+    setalltask(result1);
+    // console.log("All tasks: ", Alltasks);
+    if (
+      Alltasks.custom !== undefined &&
+      Alltasks.custom !== null
+    ) {
+      setalltasktoshow(Object.keys(Alltasks.custom).sort());
+    } else {
+      console.log("no data yet wait.....");
+    }
+  };
+  setTimeout(getdata, 1000);
+
   useEffect(() => {
     handletaskn();
     if (props.result) {
@@ -92,14 +106,17 @@ function Sidebar(props) {
               <button id="simple-list-item-4">
                 <i class="bi bi-list-task"></i>Tasks
               </button>
-              {/* {console.log(Object.keys(props.Alltasks))} */}
-              {/* {Object.keys(props.Alltasks).map((item, i) => {
-                return (
-                  <button id="simple-list-item-4">
-                    <i class="bi bi-list-task"></i> {item}
+              {Alltaskstoshow !== null && Alltaskstoshow !== undefined ? (
+                Alltaskstoshow.map((item, i) => (
+                  <button key={i} id="simple-list-item-4" name={item}  onClick={(e) => {
+                    handletaskn(e.target.name);
+                  }} >
+                    <i className="bi bi-list-task"></i> {item}
                   </button>
-                );
-              })} */}
+                ))
+              ) : (
+                <p>No data yet, please wait...</p>
+              )}
             </div>
             <div className="listnew">
               <input
