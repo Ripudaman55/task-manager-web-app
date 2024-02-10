@@ -30,10 +30,7 @@ function Sidebar(props) {
     const result1 = await getCustomAllTasks(props.user.uid);
     setalltask(result1);
     // console.log("All tasks: ", Alltasks);
-    if (
-      Alltasks.custom !== undefined &&
-      Alltasks.custom !== null
-    ) {
+    if (Alltasks.custom !== undefined && Alltasks.custom !== null) {
       setalltasktoshow(Object.keys(Alltasks.custom).sort());
     } else {
       console.log("no data yet wait.....");
@@ -71,7 +68,9 @@ function Sidebar(props) {
                   handletaskn("My Day");
                 }}
               >
-                <i class="bi bi-brightness-high"></i>My Day
+           
+                  <i class="bi bi-brightness-high"></i>My Day
+               
               </button>
               <button
                 id="simple-list-item-2"
@@ -80,7 +79,9 @@ function Sidebar(props) {
                   handletaskn(e.target.name);
                 }}
               >
-                <i class="bi bi-star"></i>Important
+             
+                  <i class="bi bi-star"></i>Important
+               
               </button>
               <button
                 id="simple-list-item-3"
@@ -88,8 +89,9 @@ function Sidebar(props) {
                 onClick={(e) => {
                   handletaskn(e.target.name);
                 }}
-              >
-                <i class="bi bi-calendar2-week"></i>Planned
+             >
+                  <i class="bi bi-calendar2-week"></i>Planned
+              
               </button>
               <button
                 id="simple-list-item-4"
@@ -98,20 +100,39 @@ function Sidebar(props) {
                   handletaskn(e.target.name);
                 }}
               >
-                <i class="bi bi-infinity"></i>All
+           
+                  <i class="bi bi-infinity"></i>All
+              
               </button>
-              <button id="simple-list-item-4">
-                <i class="bi bi-house-door"></i>Assigned to me
+              <button
+                id="simple-list-item-4"
+                name="Assigned to me"
+                onClick={(e) => {
+                  handletaskn(e.target.name);
+                }}
+              >
+              
+                  <i class="bi bi-house-door"></i>Assigned to me
+               
               </button>
               <button id="simple-list-item-4">
                 <i class="bi bi-list-task"></i>Tasks
               </button>
               {Alltaskstoshow !== null && Alltaskstoshow !== undefined ? (
                 Alltaskstoshow.map((item, i) => (
-                  <button key={i} id="simple-list-item-4" name={item}  onClick={(e) => {
-                    handletaskn(e.target.name);
-                  }} >
-                    <i className="bi bi-list-task"></i> {item}
+                  <button
+                    key={i}
+                    id="simple-list-item-4"
+                    name={item}
+                    onClick={(e) => {
+                      handletaskn(e.target.name);
+                    }}
+                  >
+                   
+
+                  
+                      <i className="bi bi-list-task"></i> {item}
+                  
                   </button>
                 ))
               ) : (

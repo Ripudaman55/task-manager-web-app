@@ -32,7 +32,7 @@ function App() {
       else {
         auth.signOut();
         
-        console.log("LOGEEDOUT");
+        console.log("LOGEEDOUT!!!");
         Setls(0)
         setlogged(false)
       }

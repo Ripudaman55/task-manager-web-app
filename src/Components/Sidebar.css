@@ -28,9 +28,6 @@
   }
 }
 
-.slider i{
-  margin-right: 10px;
-}
 /* .slide-in {
   display: inline-block;
   animation: slideInAnimation 0.5s ease-in-out forwards;
@@ -74,15 +71,25 @@
   padding: 20px;
   margin-top: 10px;
   width: 100%;
+  align-items: left;
+  text-align: left;
   font-size: 18px;
   background-color: rgb(37, 36, 35);
   color: white;
   border: solid 0px;
+  
+}
+.scrollspy-example button i{
+  margin-right: 15px;
+  margin-left: 20%;
 
 }
 
 .scrollspy-example button:hover {
   background-color: rgb(59, 58, 57);
+  .buttonsdiv{
+    background-color: rgb(59, 58, 57);
+  }
 }
 
 .items {
