@@ -33,6 +33,15 @@
             "react-app/jest"
         ]
     },
+    "devDependencies": {
+        "jest": "jest.config.js",
+        "jest-junit": "^16.0.0",
+        "netlify-cli": "^17.16.1"
+      },
+      "jest": {
+        "roots": [
+          "<rootDir>/src"
+        ]},
     "browserslist": {
         "production": [
             ">0.2%",
