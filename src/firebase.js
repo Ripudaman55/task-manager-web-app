@@ -1,3 +1,6 @@
+/*
+
+
 import { initializeApp } from "firebase/app";
 import {
   getFirestore,
@@ -278,3 +281,8 @@ export const EmailVerifyByFirebase= async(userid)=>{
     console.error("No user found.");
   }
 }
+
+
+
+
+*/
